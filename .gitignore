@@ -2,6 +2,10 @@
 private_settings.json
 test_webhook.py
 
+# venv stuff
+raw_test/
+reset_venv.bat
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
