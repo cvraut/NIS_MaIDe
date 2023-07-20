@@ -1,0 +1,52 @@
+import os
+import sys
+sys.path.append('../')
+import settings
+from json import load, dump
+
+private_settings = {"webhook_urls":[],}
+
+def check_settings():
+    # This function checks the settings.py file for any errors.
+    if settings.options["user"] == "auto":
+        settings.options["user"] = os.getlogin()
+    if "{user}" in settings.options["maid_files_loc"]:
+        settings.options["maid_files_loc"] = settings.options["maid_files_loc"].format(user = settings.options["user"])
+    if "{user}" in settings.options["default_image_dir"]:
+        settings.options["default_image_dir"] = settings.options["default_image_dir"].format(user = settings.options["user"])
+    if not os.path.exists(settings.options["maid_files_loc"]):
+        print("MaIDe files location does not exist, creating...")
+        os.makedirs(settings.options["maid_files_loc"],exist_ok=True)
+    if not os.path.exists(settings.options["default_image_dir"]):
+        print("MaIDe default image directory does not exist, creating...")
+        os.makedirs(settings.options["default_image_dir"],exist_ok=True)
+    return settings.options
+
+checked_settings = check_settings()
+# release the checked settings to global namespace
+for k in checked_settings:
+    globals()[k] = checked_settings[k]
+
+private_fname = maid_files_loc + "\\private_settings.json"
+
+def grab_private_settings():
+    # This function looks in the MaIDe files location for a private_settings.json and returns the contents as a dict.
+    # if the file does not exist, it returns an empty dict.
+    
+    # check if the file exists
+    if not os.path.exists(private_fname):
+        return {}
+    
+    with open(private_fname, "r") as f:
+        return load(f)
+    
+def write_private_settings(private_settings):
+    # this write the private settings to the private_settings.json file
+    with open(private_fname, "w+") as f:
+        dump(private_settings, f)
+
+private_settings = grab_private_settings()
+
+if len(private_settings) == 0:
+    print("No private settings found, creating...")
+    write_private_settings(private_settings)
