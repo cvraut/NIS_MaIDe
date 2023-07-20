@@ -1,3 +1,7 @@
+# forbidden knowledge
+private_settings.yaml
+test_webhook.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
