@@ -1,2 +1,5 @@
 # NIS_MaIDe
-A script to facilitate image deconvolution using NIS
+
+NIS Mass Image Deconvoluter
+
+A script to facilitate image deconvolution using NIS.
