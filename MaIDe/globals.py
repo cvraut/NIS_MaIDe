@@ -4,7 +4,7 @@ sys.path.append('../')
 import settings
 from json import load, dump
 
-private_settings = {"webhook_urls":[],}
+private_settings_default = {"webhook_urls":[],"dbfile":"maide.db"}
 
 def check_settings():
     # This function checks the settings.py file for any errors.
@@ -27,7 +27,8 @@ checked_settings = check_settings()
 for k in checked_settings:
     globals()[k] = checked_settings[k]
 
-private_fname = maid_files_loc + "\\private_settings.json"
+private_fname = maid_files_loc + "private_settings.json"
+print(private_fname)
 
 def grab_private_settings():
     # This function looks in the MaIDe files location for a private_settings.json and returns the contents as a dict.
@@ -49,4 +50,12 @@ private_settings = grab_private_settings()
 
 if len(private_settings) == 0:
     print("No private settings found, creating...")
-    write_private_settings(private_settings)
+    write_private_settings(private_settings_default)
+    
+    
+# grab version from the .toml file
+with open(os.path.dirname(os.path.abspath(__file__))+"\\pyproject.toml", "r") as f:
+    for line in f:
+        if "version" in line:
+            version = line.split("=")[1].replace('"','').strip()
+            break
