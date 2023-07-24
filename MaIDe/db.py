@@ -26,7 +26,7 @@ retreive_row_sql = """
 SELECT * FROM work_log ORDER BY time DESC LIMIT 1;
 """
 
-def get_last_run_status(db_file):
+def get_last_run_status(db_file,debug=False):
     # This function checks the last run status and returns a dictionary 
     # consisting of the last run status according to the MaIDe DB structure.
     # If this is the first time maide_file_loc was constructed or could not 
@@ -39,9 +39,12 @@ def get_last_run_status(db_file):
     # check if the table exists, create it if it does not
     con = sql_connection(db_file)
     if not check_table_exists(con):
-        print("table not found, creating...")
+        if debug:
+            print("table not found, creating...")
         create_table(con, construct_tbl_sql)
     recent_row = get_most_recent_row(con)
+    if not recent_row:
+        return {}
     if con:
         con.close()
     row_dict = {sql_cols[i]:recent_row[0][i] for i in range(len(sql_cols))}
