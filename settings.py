@@ -12,4 +12,5 @@ options = {
     "supported_img_types": [".nd2"],
     "hook": True,
     "debug": True,
+    "k_recent":5,
 }
