@@ -5,19 +5,21 @@
 import os
 import glob
 from pathlib import Path
+import pkg_resources
+from importlib import reload
 
 def grab_predownloaded_dependencies(): 
     # This function returns a dict of strings corresponding to the included wheels.
     # open the wheel directory and loop through all the files
     file_location = os.path.dirname(os.path.abspath(__file__))
     lookin = Path("{}/wheels/".format(file_location))
-    print(lookin)
+    # print(lookin)
     included_wheels = glob.glob(str(lookin / "*.whl" ))
     return {os.path.basename(iw).split("-")[0].lower():iw for iw in included_wheels}
 
 def check_avail_packages():
     # This function returns a list of strings corresponding to the packages installed in the user's system.
-    import pkg_resources
+    reload(pkg_resources)
     return ["_".join(d.project_name.split("-")).lower() for d in pkg_resources.working_set]
 
 def get_missing_packages(avail, predownloaded):
@@ -38,9 +40,9 @@ def install_all_included_dependencies(max_loops = 5):
     predownloaded = grab_predownloaded_dependencies()
     avail = check_avail_packages()
     miss = get_missing_packages(avail, predownloaded)
-    print("miss",miss)
-    print("avail",avail)
+    # print("avail",avail)
     if len(miss) > 0:
+        print("missing",miss)
         install_select_packages(miss, predownloaded)
         return install_all_included_dependencies(max_loops = max_loops - 1)
     else:
