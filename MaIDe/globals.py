@@ -5,6 +5,18 @@ import settings
 from json import load, dump
 from MaIDe import dependency_installer
 
+# things to get the linter to calm down
+version = ""
+maid_files_loc = ""
+dbfile = ""
+default_image_dir = ""
+contact = ""
+user = ""
+debug = ""
+k_recent = 0
+folder_suffix = ""
+img_suffix = ""
+
 def check_settings():
     # This function checks the settings.py file for any errors.
     if settings.options["user"] == "auto":
