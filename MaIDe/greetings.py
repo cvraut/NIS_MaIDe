@@ -9,3 +9,6 @@ def welcome_message(user):
     
 def check_run_status():
     print("Checking last run status...")
+    
+def complete():
+    print("Done!")

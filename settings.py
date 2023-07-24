@@ -10,5 +10,6 @@ options = {
     "folder_suffix":"_deconvolved",
     "img_suffix":"_img_deconvolved",
     "supported_img_types": [".nd2"],
-    "hook": True
+    "hook": True,
+    "debug": True,
 }
