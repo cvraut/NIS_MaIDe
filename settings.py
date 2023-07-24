@@ -9,7 +9,6 @@ options = {
     "NIS_exec": r"C:\Program Files\NIS-Elements\nis_ar.exe",
     "folder_suffix":"_deconvolved",
     "img_suffix":"_img_deconvolved",
-    "supported_img_types": [".nd2"],
     "hook": True,
     "debug": True,
     "k_recent":5,
