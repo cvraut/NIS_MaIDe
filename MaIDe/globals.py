@@ -16,6 +16,9 @@ debug = ""
 k_recent = 0
 folder_suffix = ""
 img_suffix = ""
+mac_filename_suffix = ".mac"
+template_fname = ""
+NIS_exec = ""
 
 def check_settings():
     # This function checks the settings.py file for any errors.
@@ -38,7 +41,7 @@ checked_settings = check_settings()
 for k in checked_settings:
     globals()[k] = checked_settings[k]
 
-private_settings_default = {"webhook_urls":[],"dbfile":maid_files_loc+"\\maide.db"}
+private_settings_default = {"webhook_urls":{},"dbfile":maid_files_loc+"\\maide.db"}
 
 private_fname = maid_files_loc + "private_settings.json"
 print(private_fname)

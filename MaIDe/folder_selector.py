@@ -27,3 +27,8 @@ def get_nd5_files(dir,ignore_suffix):
         return []
     else:
         return [os.path.join(dir, f) for f in os.listdir(dir) if os.path.isfile(os.path.join(dir, f)) and os.path.splitext(f)[1] == ".nd2" and not f[:-4].endswith(ignore_suffix)]
+    
+def create_output_dir(output_dir):
+    # this function creates the output directory if it does not exist
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)

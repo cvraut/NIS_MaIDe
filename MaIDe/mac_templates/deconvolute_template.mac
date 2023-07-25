@@ -1,0 +1,6 @@
+OpenDocument("$ORIGINAL_IMG",0);
+ActivateDocument("Color");
+Deconv_2DAutoDeconvolution(0.950000,1.000000,0,"$CHANNELS_ZERO",1,0.163000,0.000000,1,40.000000,"$CHANNEL_MASK","$CHANNEL_EMISSION_LAMBDA","$CHANNEL_EXCITATION_LAMBDA","",1,1,0);
+ImageSaveAs("$NEW_IMG, Type Automatic.nd2",14,0);
+CloseCurrentDocument(QUERYSAVE_ASK);
+CloseCurrentDocument(QUERYSAVE_ASK);
