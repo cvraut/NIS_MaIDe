@@ -67,13 +67,17 @@ private_settings = grab_private_settings()
 if len(private_settings) == 0:
     print("No private settings found, creating...")
     write_private_settings(private_settings_default)
-    print("Assuming first time run, installing dependencies...")
-    dependency_installer.install_all_included_dependencies()
     private_settings = grab_private_settings()
 
 for k in private_settings:
     globals()[k] = private_settings[k]    
-    
+
+try:
+    import nd2
+except ModuleNotFoundError:
+    print("missing nd2 library, installing dependencies...")
+    dependency_installer.install_all_included_dependencies()
+
 # grab version from the .toml file
 with open(os.path.dirname(os.path.abspath(__file__))+"\\pyproject.toml", "r") as f:
     for line in f:

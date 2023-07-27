@@ -12,8 +12,8 @@ import subprocess
 # check last run status
 
 def run():
-    #print(globals.check_settings())
-    print(globals.webhook_urls)
+    if globals.debug:
+        print(globals.check_settings())
     greetings.startup_message(globals.version, globals.contact)
     greetings.welcome_message(globals.user)
     greetings.check_run_status()

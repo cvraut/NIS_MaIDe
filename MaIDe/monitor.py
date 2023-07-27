@@ -4,12 +4,15 @@
 
 import requests #dependency
 from datetime import datetime
+from filecmp import cmp
+from time import sleep
+from MaIDe import folder_selector
 
 def job_start_wh(globals, img_dir, mac_file, n_images):
     wh(globals,
-       "Job start🏃‍♂️ ...",
+       "Job start 🏃‍♂️ ...",
        "Starting to deconvolute {} images".format(n_images),
-       "img directory: '{}'\nmac_file: '{}'".format(img_dir,mac_file))
+       "img directory: `{}`\nmac_file: `{}`".format(img_dir,mac_file))
     
 def wh(globals,title="🧪 testing...",content="wh was called with default params",description=""):
     data = {
@@ -37,4 +40,15 @@ def wh(globals,title="🧪 testing...",content="wh was called with default param
                 if globals.debug:
                     print("Payload delivered successfully to {}, code {}.".format(sname,result.status_code))
 
+def verify_deconvolution(img1,img2):
+    # this function compares the two images and returns False if they are the same
+    return cmp(img1,img2)
 
+def check_progress(img_dir,output_dir):
+    last_complete_time = datetime.now()
+    files_to_deconv = folder_selector.get_nd5_files(img_dir,"")
+    files_done = set()
+    prev_done = len(files_done)
+    while len(files_to_deconv) != prev_done:
+        nd2_in_output = folder_selector.get_nd5_files(output_dir,"")
+        sleep(15)
