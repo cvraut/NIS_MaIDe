@@ -79,7 +79,7 @@ def select_deconvolution_channels(channel_choices):
     return "".join([str(int(i in selected)) for i in channel_choices])
 
 def confirm_exit():
-    print("NIS is running 🏃‍, Press any key to stop MaIDe.")
+    print("Done! Press any key to stop MaIDe...")
     input()
     
 def mac_file_complete(mac_file):

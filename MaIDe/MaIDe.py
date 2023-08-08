@@ -59,9 +59,12 @@ def run():
         if globals.debug:
             print(cmd)
         try:
-            subprocess.Popen(cmd, shell=True)
+            output = subprocess.Popen(cmd, shell=True)
+            print(output)
             db.insert_run_status(globals.dbfile, job_num, macfile_loc=mac_file_location, img_dir=nd5_dir, n_imgs=len(nd2_files), status_str="start")
             monitor.job_start_wh(globals, nd5_dir, mac_file_location, len(nd2_files))
+            files_done,errors = monitor.check_progress(nd2_files,output_dir,nd5_dir + globals.failed_folder_suffix)
+            monitor.job_complete_wh(globals,)
         except Exception as e:
             print(e)
             print("Launching NIS-ar failed :(\ncontact {}".format(globals.contact))

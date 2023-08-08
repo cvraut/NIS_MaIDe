@@ -4,7 +4,7 @@ import os
 
 def get_all_folders(dirs,folder_suffix):
     # this function looks into the dirs directory and returns all the subdirectories along with their modified time
-    # this function will ignore any folders ending with the folder suffix from settings.py
+    # this function will ignore any folders ending with the folder suffix from settings.py    
     if not os.path.isdir(dirs):
         return []
     # print(dirs)
@@ -23,10 +23,11 @@ def get_k_folders(dir,k,folder_suffix):
 
 def get_nd5_files(dir,ignore_suffix):
     # this function returns a list of all the nd5 files in the specified dir directory
+    # if ignore_suffix is "" I want it to return all nd2 files found
     if not os.path.isdir(dir):
         return []
     else:
-        return [os.path.join(dir, f) for f in os.listdir(dir) if os.path.isfile(os.path.join(dir, f)) and os.path.splitext(f)[1] == ".nd2" and not f[:-4].endswith(ignore_suffix)]
+        return [os.path.join(dir, f) for f in os.listdir(dir) if os.path.isfile(os.path.join(dir, f)) and os.path.splitext(f)[1] == ".nd2" and (not f[:-4].endswith(ignore_suffix) or (not ignore_suffix))]
     
 def create_output_dir(output_dir):
     # this function creates the output directory if it does not exist

@@ -6,6 +6,7 @@ from json import load, dump
 from MaIDe import dependency_installer
 
 # things to get the linter to calm down
+# in the future prolly replace these with defaults 🤔 ...
 version = ""
 maid_files_loc = ""
 dbfile = ""
@@ -19,6 +20,7 @@ img_suffix = ""
 mac_filename_suffix = ".mac"
 template_fname = ""
 NIS_exec = ""
+term_size = ""
 
 def check_settings():
     # This function checks the settings.py file for any errors.
@@ -34,6 +36,8 @@ def check_settings():
     if not os.path.exists(settings.options["default_image_dir"]):
         print("MaIDe default image directory does not exist, creating...")
         os.makedirs(settings.options["default_image_dir"],exist_ok=True)
+    if settings.options["term_size"] == "auto":
+        settings.options["term_size"] = os.get_terminal_size()[0]
     return settings.options
 
 checked_settings = check_settings()
