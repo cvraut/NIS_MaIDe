@@ -106,4 +106,4 @@ def check_progress(files_to_deconv,output_dir,failed_dir):
                     ETR = "ETR: {} min {} seconds, last img took {} seconds".format(time_remaining//60,time_remaining%60,time_taken[-1])        
         sleep(15)
     print(f"All {len(files_to_deconv)} files passed through deconvolution. Success rate: {len(files_done)-len(errors)}/{len(files_to_deconv)} ({round(100*(len(files_done)-len(errors))/len(files_to_deconv))}%)")
-    return files_done,errors
+    return files_done,errors, sum(time_taken)
