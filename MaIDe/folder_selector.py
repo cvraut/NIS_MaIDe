@@ -1,6 +1,7 @@
 # folder selector
 
 import os
+import shutil
 
 def get_all_folders(dirs,folder_suffix):
     # this function looks into the dirs directory and returns all the subdirectories along with their modified time
@@ -32,4 +33,8 @@ def get_nd5_files(dir,ignore_suffix):
 def create_output_dir(output_dir):
     # this function creates the output directory if it does not exist
     if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+    else:
+        # we want to remove the old directory to make sure that old jobs don't mess up the progress bar & output validation
+        shutil.rmtree(output_dir)
         os.mkdir(output_dir)
