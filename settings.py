@@ -16,4 +16,5 @@ options = {
     "template_fname": "deconvolute_template.mac",
     "from_wheels":True,
     "term_size":"auto",
+    "progress_delay_seconds":2, # 15 seconds is better for the machine, but worse for the human
 }
