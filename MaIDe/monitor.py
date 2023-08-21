@@ -25,6 +25,16 @@ def job_complete_wh(globals, n_images, n_errors, time_taken, output_dir,failed_d
        "Finished deconvoluting {} images".format(n_images),
        desc)
     
+def error_wh(globals,exception):
+    desc = f"traceback: {e.traceback}"
+    title = "MaIDe threw an Exception"
+    content = f"exception: {e.message}"
+    wh(globals,
+       title,
+       content,
+       desc)
+    raise e
+    
 def wh(globals,title="🧪 testing...",content="wh was called with default params",description=""):
     data = {
         "content" : title,
