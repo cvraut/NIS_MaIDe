@@ -63,7 +63,7 @@ def run():
             #print(output)
             db.insert_run_status(globals.dbfile, job_num, macfile_loc=mac_file_location, img_dir=nd5_dir, n_imgs=len(nd2_files), status_str="start")
             monitor.job_start_wh(globals, nd5_dir, mac_file_location, len(nd2_files))
-            files_done,errors,time_taken = monitor.check_progress(nd2_files,output_dir,nd5_dir + globals.failed_folder_suffix, globals.progress_delay_seconds)
+            files_done,errors,time_taken = monitor.check_progress(nd2_files,output_dir,nd5_dir + globals.failed_folder_suffix)
             monitor.job_complete_wh(globals,len(files_done),len(errors),time_taken,output_dir,nd5_dir + globals.failed_folder_suffix)
         except Exception as e:
             print(e)

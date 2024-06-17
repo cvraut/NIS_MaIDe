@@ -25,16 +25,6 @@ def job_complete_wh(globals, n_images, n_errors, time_taken, output_dir,failed_d
        "Finished deconvoluting {} images".format(n_images),
        desc)
     
-def error_wh(globals,exception):
-    desc = f"traceback: {e.traceback}"
-    title = "MaIDe threw an Exception"
-    content = f"exception: {e.message}"
-    wh(globals,
-       title,
-       content,
-       desc)
-    raise e
-    
 def wh(globals,title="🧪 testing...",content="wh was called with default params",description=""):
     data = {
         "content" : title,
@@ -73,7 +63,7 @@ def verify_deconvolution(img1,img2):
     # this function compares the two images and returns False if they are the same
     return cmp(img1,img2)
 
-def check_progress(files_to_deconv,output_dir,failed_dir,delay_seconds):
+def check_progress(files_to_deconv,output_dir,failed_dir):
     #print(output_dir)
     last_complete_time = [datetime.now()]
     time_taken = []
@@ -114,6 +104,6 @@ def check_progress(files_to_deconv,output_dir,failed_dir,delay_seconds):
                     time_taken.append((last_complete_time[-1] - last_complete_time[-2]).seconds)
                     time_remaining = round(sum(time_taken)*(len(files_to_deconv)/len(files_done)) - sum(time_taken))
                     ETR = "ETR: {} min {} seconds, last img took {} seconds".format(time_remaining//60,time_remaining%60,time_taken[-1])        
-        sleep(int(delay_seconds))
+        sleep(15)
     print(f"All {len(files_to_deconv)} files passed through deconvolution. Success rate: {len(files_done)-len(errors)}/{len(files_to_deconv)} ({round(100*(len(files_done)-len(errors))/len(files_to_deconv))}%)")
     return files_done,errors, sum(time_taken)

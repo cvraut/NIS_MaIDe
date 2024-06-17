@@ -3,7 +3,7 @@ import sys
 sys.path.append('../')
 import settings
 from json import load, dump
-from MaIDe import dependency_installer
+#from MaIDe import dependency_installer
 
 # things to get the linter to calm down
 # in the future prolly replace these with defaults 🤔 ...
