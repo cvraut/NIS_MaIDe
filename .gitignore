@@ -1,6 +1,7 @@
 # forbidden knowledge
 private_settings.json
 test_webhook.py
+MaIDe_secret/
 
 # venv stuff
 raw_test/
