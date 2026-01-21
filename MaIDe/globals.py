@@ -35,7 +35,13 @@ def check_settings():
         os.makedirs(settings.options["maid_files_loc"],exist_ok=True)
     if not os.path.exists(settings.options["default_image_dir"]):
         print("MaIDe default image directory does not exist, creating...")
-        os.makedirs(settings.options["default_image_dir"],exist_ok=True)
+        try:
+            os.makedirs(settings.options["default_image_dir"],exist_ok=True)
+        except PermissionError as e:
+            print(f"Error creating default image directory: {e}")
+            print("Defaulting to user's Documents folder.")
+            settings.options["default_image_dir"] = os.path.join(os.path.expanduser("~"), "Documents", "MaIDe")
+            os.makedirs(settings.options["default_image_dir"], exist_ok=True)
     if settings.options["term_size"] == "auto":
         settings.options["term_size"] = os.get_terminal_size()[0]
     return settings.options
